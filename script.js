@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
           if (char === "←") {
               // Backspace functionality
-              textInput.value = textInput.value.slice(0, -1);
+              textInput.value = textInput.value.slice(0, -2);
           } else if (char === "space") {
               // Space functionality
               console.log("Space is pressed");
