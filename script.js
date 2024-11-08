@@ -1,21 +1,26 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const textInput = document.getElementById("textInput");
-    const keys = document.querySelectorAll(".keyboard button");
-  
-    keys.forEach(key => {
+  const textInput = document.getElementById("textInput");
+  const keys = document.querySelectorAll(".keyboard button");
+
+  keys.forEach(key => {
       key.addEventListener("click", () => {
-        const char = key.getAttribute("data-char");
-  
-        if (char === "←") {
-          // Backspace functionality
-          textInput.value = textInput.value.slice(0, -1);
-        } else {
-          // Insert character
-          textInput.value += char;
-        }
+          const char = key.getAttribute("data-char");
+
+          if (char === "←") {
+              // Backspace functionality
+              textInput.value = textInput.value.slice(0, -1);
+          } else if (char === "space") {
+              // Space functionality
+              console.log("Space is pressed");
+              textInput.value += ' ';
+          } else {
+              // Insert character
+              textInput.value += char;
+          }
       });
-    });
   });
+});
+
   function toggleKeyboard(keyboardId) {
     // Hide all keyboards
     const keyboards = document.querySelectorAll('.keyboard');
