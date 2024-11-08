@@ -16,13 +16,15 @@ document.addEventListener("DOMContentLoaded", function() {
               textInput.value = textInput.value.slice(0, -1);
               textInput.value = textInput.value.slice(0, -1);
           } else if (char === "←←") {
-    
             textInput.value = textInput.value.slice(0, -1);
           } else if (char === "space") {
               // Space functionality
               console.log("Space is pressed");
               textInput.value += ' ';
-          } else {
+          }else if (char === "↩") {
+            // Enter functionality (new line)
+            textInput.value += '\n';  // Adds a new line
+        }else {
               // Insert character
               textInput.value += char;
           }
