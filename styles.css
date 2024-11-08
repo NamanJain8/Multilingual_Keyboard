@@ -1,4 +1,15 @@
 
+#textInput {
+  overflow-y: auto;
+  scrollbar-width: thin; /* Firefox */
+}
+#textInput::-webkit-scrollbar {
+  width: 8px; /* For Chrome, Safari */
+}
+#textInput::-webkit-scrollbar-thumb {
+  background: #4A90E2;
+  border-radius: 10px;
+}
 .keyboard {
   position: fixed;       
   bottom: 0;            

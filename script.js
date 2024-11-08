@@ -26,6 +26,17 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+// Prevent default keyboard from opening if possible
+document.getElementById('textInput').addEventListener('focus', function(e) {
+  e.preventDefault(); // Attempt to prevent the default keyboard from opening
+  this.blur(); // Blurring here, assuming custom keyboard will manage focus
+});
+
+// Focus back to simulate the custom keyboard input (optional)
+document.querySelector('.keyboard').addEventListener('click', function() {
+  document.getElementById('textInput').focus(); // Bring focus back for custom input
+});
+
 
   function toggleKeyboard(keyboardId) {
     // Hide all keyboards
