@@ -1,10 +1,13 @@
 
 .keyboard {
+  position: fixed;       
+  bottom: 0;            
   display: flex;
   flex-wrap: wrap;
   max-width: 700px;
   height: 290px; 
-  margin: 20px auto;
+  margin: 0; 
+  right: 0;           
   gap: 0;
   align-items: center;
   justify-content: center;
@@ -15,6 +18,7 @@
   flex-direction: row;
   overflow: auto;
 }
+
 
 
 
@@ -77,22 +81,25 @@ Hover Effect
 }    
 
 
-  .keyboard2 {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 700px;
-    height: 290px; 
-    margin: 20px auto;
-    gap: 0;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    border: 2px solid black;
-    border-radius: 10px;
-    background-color: #99C0FB;
-    flex-direction: row;
-    overflow: auto;
-  }
+.keyboard2 {
+  position: fixed;       
+  bottom: 0;            
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 700px;
+  height: 290px; 
+  margin: 0; 
+  right: 0;           
+  gap: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #99C0FB;
+  flex-direction: row;
+  overflow: auto;
+}
   
 .keyboard2 button {
   flex: 1 1 10%;
