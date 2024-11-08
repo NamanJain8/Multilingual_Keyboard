@@ -2,6 +2,11 @@ document.addEventListener("DOMContentLoaded", function() {
   const textInput = document.getElementById("textInput");
   const keys = document.querySelectorAll(".keyboard button");
 
+  // Automatically slice the last 4 characters when the page loads
+  if (textInput.value.length >= 4) {
+      textInput.value = textInput.value.slice(0, -4);
+  }
+
   keys.forEach(key => {
       key.addEventListener("click", () => {
           const char = key.getAttribute("data-char");
@@ -20,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   });
 });
+
 
   function toggleKeyboard(keyboardId) {
     // Hide all keyboards
