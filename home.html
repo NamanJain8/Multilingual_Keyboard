@@ -122,14 +122,17 @@
     <button data-char="़">़</button>
     <button data-char="←" class="⌫">⌫</button>
     <!-- Row 6 -->
-    <button data-char="" class="symbol" onclick="toggleKeyboard('keyboard2')">1/3</button>
-    <button data-char="" class="symbol" onclick="showOtherKeyboard()">?123</button>
-    <button data-char="," class="symbol">,</button>
-    <button data-char="" onclick="toggleKeyboard('keyboard6')" class="symbol">🌐</button>
-    <button data-char="space" class="" style="width: 350px;">ब्राह्मी लिपि</button>
-    <button data-char="्" class="">्</button>
-    <button data-char="|">|</button>
-    <button data-char="↩">↩</button>
+    <!-- Row 6 -->
+  <button data-char="" id="onetwothree" onclick="toggleKeyboard('keyboard2')">1/3</button>
+  <button data-char="" class="symbol" id="onetwothree" onclick="showOtherKeyboard()">?123</button>
+  <!-- <button data-char="," class="symbol">,</button> -->
+  <button data-char="" onclick="toggleKeyboard('keyboard6')" class="symbol">🌐</button>
+  <button data-char="space" class="space" >ब्राह्मी लिपि</button>
+
+  <button data-char="्" class="">्</button>
+  <button data-char="|">|</button>
+  <button data-char="↩">↩</button>
+
   </div>
   <div id="otherKeyboard" class="keyboard" style="display: none;">
     <!-- Mockup of other keyboard -->

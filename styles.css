@@ -54,29 +54,28 @@
 } */
 
 
-
-
 .keyboard {
   display: flex;
   flex-wrap: wrap;
   max-width: 700px;
-  height: 370px; /* Adjusted for a reasonable button layout */
+  height: 290px; 
   margin: 20px auto;
   gap: 0;
+  align-items: center;
   justify-content: center;
   padding: 10px;
   border: 2px solid black;
   border-radius: 10px;
   background-color: #99C0FB;
   flex-direction: row;
-  overflow: auto; /* Allows scrolling if content exceeds height */
+  overflow: auto;
 }
 
-/* Button Styling */
+
 .keyboard button {
   flex: 1 1 10%;
-  /* max-width: 10%; */
   height: 33px;
+  align-content: stretch;
   width: 33px;
   padding: 1px;
   margin: 0px 0px;
@@ -94,18 +93,30 @@
   justify-content: center;
 }
 
-/* Hover Effect */
+Hover Effect
 .keyboard button:hover {
     background-color: rgba(209, 209, 209, 0.7); 
 }
 
-/* Special Button Styling */
-.keyboard button.space,
 .keyboard button.backspace {
-    flex: 1 1 20%; /* Larger buttons take two slots (20% width each) */
-    max-width: 20%;
-    border-radius: 8px;
+  flex: 1 1 40%; 
+  max-width: 100%;
+  border-radius: 8px;
+  
 }
+
+/* Special Button Styling */
+.keyboard button.space{
+    flex: 1 1 40%; 
+    max-width: 290%;
+    border-radius: 8px;
+    background-image: url('../Multilingual_Keyboard/img/space_button.png');
+    width: 100px;
+    background-color: transparent;
+
+  } 
+
+
 
 /* Responsive Adjustments */
 @media (max-width: 480px) {
@@ -115,21 +126,21 @@
     }
 
     .keyboard button {
-        height: 33px; /* Reduces button height for smaller screens */
+        height: 33px; 
         font-size: 1.1rem;
     }
-}
+    #onetwothree{
+      width: 40px;
+      
+    } 
+}    
 
-  .symbol {
-    font-size: 24px;
-    padding: 10px 20px;
-    /* color: black; */
-    /* background-color: #f1f1f1; */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+#onetwothree{
+    font-size: 0.8rem;
+  } 
+
   
+
   .modal {
     display: none; /* Hidden by default */
     position: fixed;
