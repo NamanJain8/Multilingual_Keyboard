@@ -81,46 +81,6 @@ Hover Effect
 }    
 
 
-.keyboard2 {
-  position: fixed;       
-  bottom: 0;            
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 700px;
-  height: 290px; 
-  margin: 0; 
-  right: 0;           
-  gap: 0;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  border: 2px solid black;
-  border-radius: 10px;
-  background-color: #99C0FB;
-  flex-direction: row;
-  overflow: auto;
-}
-  
-.keyboard2 button {
-  flex: 1 1 10%;
-  height: 33px;
-  align-content: stretch;
-  width: 33px;
-  padding: 1px;
-  margin: 0px 0px;
-  font-size: 1.2rem;
-  text-align: center;
-  cursor: pointer;
-  background-image: url('img/Brahmi lipi tools symbol_20241103_163634_0000.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 
   
