@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
   const textInput = document.getElementById("textInput");
   const keys = document.querySelectorAll(".keyboard button");
 
-  // Automatically slice the last 4 characters when the page loads
   if (textInput.value.length >= 4) {
       textInput.value = textInput.value.slice(0, -4);
   }
@@ -44,26 +43,6 @@ document.querySelector('.keyboard').addEventListener('click', function() {
 });
 
 
-  function toggleKeyboard(keyboardId) {
-    // Hide all keyboards
-    const keyboards = document.querySelectorAll('.keyboard');
-    keyboards.forEach(keyboard => {
-        keyboard.style.display = 'none'; // Hide all keyboards
-    });
-
-    // Show the selected keyboard
-    const selectedKeyboard = document.getElementById(keyboardId);
-    if (selectedKeyboard) {
-        selectedKeyboard.style.display = 'flex'; // Show the selected keyboard
-        selectedKeyboard.style.flexDirection = 'row'; // Ensure it's in row layout
-    }
-}
-
-document.getElementById("languageButton").onclick = function() {
-  // Toggle the keyboard with id "keyboard5"
-  toggleKeyboard("keyboard5");
-};
-
 // Function to toggle the display of keyboards
 function toggleKeyboard(keyboardId) {
   // Hide all keyboards
@@ -88,24 +67,6 @@ function hideAllKeyboards() {
   });
 }
 
-
-// function showOtherKeyboard() {
-//   document.getElementById("keyboard1").style.display = "none";
-//   document.getElementById("otherKeyboard").style.display = "flex"; // Ensure flex layout is applied
-// }
-// function showOtherKeyboards() {
-//   document.getElementById("keyboard1").style.display = "none"; // Hide the first keyboard
-//   document.getElementById("keyboard2").style.display = "none"; // Hide the first keyboard
-//   document.getElementById("otherKeyboard").style.display = "none"; // Show the second keyboard
-//   document.getElementById("otherKeyboardsigns").style.display = "flex"; // Show the second keyboard
-// }
-
-// function showMainKeyboard() {
-//   document.getElementById("keyboard1").style.display = "flex";
-//   document.getElementById("otherKeyboardsigns").style.display = "none"; // Ensure flex layout is applied
-//   document.getElementById("otherKeyboard").style.display = "none";
-// }
-// Function to hide all keyboards from keyboard1 to keyboard12
 function hideAllKeyboards() {
   for (let i = 1; i <= 12; i++) {
     const keyboard = document.getElementById(`keyboard${i}`);
