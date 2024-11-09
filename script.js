@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
   const textInput = document.getElementById("textInput");
   const keys = document.querySelectorAll(".keyboard button");
-    // Prevent default keyboard from opening on mobile by removing focus
-    textInput.addEventListener("focus", function(e) {
-      this.blur(); // Remove focus to prevent default keyboard from opening
-    });
+
+  // Prevent mobile keyboard by using `readonly`
+  textInput.setAttribute("readonly", true);
   
 
   if (textInput.value.length >= 4) {
