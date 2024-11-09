@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
   const textInput = document.getElementById("textInput");
   const keys = document.querySelectorAll(".keyboard button");
+    // Prevent default keyboard from opening on mobile by removing focus
+    textInput.addEventListener("focus", function(e) {
+      this.blur(); // Remove focus to prevent default keyboard from opening
+    });
+  
 
   if (textInput.value.length >= 4) {
       textInput.value = textInput.value.slice(0, -4);
@@ -9,21 +14,23 @@ document.addEventListener("DOMContentLoaded", function() {
   keys.forEach(key => {
       key.addEventListener("click", () => {
           const char = key.getAttribute("data-char");
+          // Focus textInput to enable updates with custom keyboard
+          textInput.focus(); 
 
           if (char === "←") {
               // Backspace functionality
               textInput.value = textInput.value.slice(0, -1);
               textInput.value = textInput.value.slice(0, -1);
-          } else if (char === "←←") {
+          }else if (char === "←←") {
             textInput.value = textInput.value.slice(0, -1);
-          } else if (char === "space") {
+          }else if (char === "space") {
               // Space functionality
               console.log("Space is pressed");
               textInput.value += ' ';
           }else if (char === "↩") {
             // Enter functionality (new line)
             textInput.value += '\n';  // Adds a new line
-        }else {
+          }else {
               // Insert character
               textInput.value += char;
           }
