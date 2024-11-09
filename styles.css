@@ -10,6 +10,15 @@
   background: #4A90E2;
   border-radius: 10px;
 }
+#textInput:focus {
+  outline: none;
+  border: 1px solid #4A90E2; /* Optional: Add border color when focused */
+  box-shadow: 0 0 5px rgba(72, 144, 226, 0.6); /* Optional: Add shadow */
+}
+
+#textInput {
+  caret-color: #4A90E2; /* This will make the cursor (caret) blink */
+}
 .keyboard {
   position: fixed;       
   bottom: 0;            

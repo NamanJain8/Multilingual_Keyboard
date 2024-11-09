@@ -108,16 +108,16 @@ window.onload = function() {
   // textarea.focus();
   const editableDiv = document.getElementById('textInput');
 
-    // Prevent mobile keyboard by preventing focus
-    editableDiv.addEventListener('click', function(event) {
-      // Optionally, you could log or handle clicks here
-      event.preventDefault();
-      event.stopPropagation();
-      editableDiv.blur();  // Remove focus immediately
-    });
+//     // Prevent mobile keyboard by preventing focus
+//     editableDiv.addEventListener('click', function(event) {
+//       // Optionally, you could log or handle clicks here
+//       event.preventDefault();
+//       event.stopPropagation();
+//       editableDiv.blur();  // Remove focus immediately
+//     });
 
-    // Optionally prevent the focus event itself, but this might block all edits
-    editableDiv.addEventListener('focus', function(event) {
-      event.preventDefault();
-    });
+//     // Optionally prevent the focus event itself, but this might block all edits
+//     editableDiv.addEventListener('focus', function(event) {
+//       event.preventDefault();
+//     });
 };
