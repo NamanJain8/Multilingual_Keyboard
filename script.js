@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
           const char = key.getAttribute("data-char");
           // Focus textInput to enable updates with custom keyboard
           textInput.focus(); 
-          textInput.preventDefault();
+
 
           if (char === "←") {
               // Backspace functionality
@@ -102,10 +102,22 @@ function showMainKeyboard() {
 }
 
 window.onload = function() {
-  // Focus the textarea
-  var textarea = document.getElementById('textInput');
-  // Focus it immediately on load
-  textarea.focus();
-  textarea.preventDefault();
-  
+  // // Focus the textarea
+  // var textarea = document.getElementById('textInput');
+  // // Focus it immediately on load
+  // textarea.focus();
+  const editableDiv = document.getElementById('textInput');
+
+    // Prevent mobile keyboard by preventing focus
+    editableDiv.addEventListener('click', function(event) {
+      // Optionally, you could log or handle clicks here
+      event.preventDefault();
+      event.stopPropagation();
+      editableDiv.blur();  // Remove focus immediately
+    });
+
+    // Optionally prevent the focus event itself, but this might block all edits
+    editableDiv.addEventListener('focus', function(event) {
+      event.preventDefault();
+    });
 };
