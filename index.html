@@ -13,7 +13,7 @@ style="background: rgb(240,181,70); background: linear-gradient(90deg, rgba(240,
   margin: 0; min-height: 100vh; display: flex; flex-direction: column; overflow-y: auto;">
 
   <!-- Fixed Header with Larger Icons -->
-  <header style="height: 40px; display: flex; align-items: center; justify-content: space-between; font-family: Arial, sans-serif; color: #4A90E2; padding: 0 15px; background-color: #f6ecec; border-bottom: 2px solid #4A90E2;">
+  <header style=" position: fixed ;height: 40px; display: flex; align-items: center; justify-content: space-between; font-family: Arial, sans-serif; color: #4A90E2; padding: 0 15px; background-color: #f6ecec; border-bottom: 2px solid #4A90E2;">
     <div style="display: flex; gap: 10px; align-items: center; justify-content: center;">
       <button title="Undo" style="background: none; font-size: 2rem; border: none; cursor: pointer; color: #4A90E2;">↩️</button>
       <button title="Redo" style="background: none; font-size: 2rem; border: none; cursor: pointer; color: #4A90E2;">↪️</button>
@@ -25,11 +25,12 @@ style="background: rgb(240,181,70); background: linear-gradient(90deg, rgba(240,
   </header>
 
   <!-- Main Content Area with Full-Width Text Area -->
-  <main style="flex: 1; padding: 10px; display: flex; justify-content: center;">
+  <main style="flex: 1; padding: 0px; display: flex; justify-content: center;">
     <div style="width: 100%; max-width: 800px;overflow: scroll">
       <textarea id="textInput" style="
         width: 100%; 
-        height: calc(100vh - 130px); /* Adjusted to allow for keyboard */
+        margin-top: 30px;
+        height: calc(100vh - 130px);
         resize: none;
         font-size: 1.2rem;
         font-family: 'Arial', sans-serif;

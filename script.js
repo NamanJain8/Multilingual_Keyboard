@@ -2,10 +2,10 @@
 document.addEventListener("DOMContentLoaded", function() {
   const textInput = document.getElementById("textInput");
   const keys = document.querySelectorAll(".keyboard button");
-    // Prevent default keyboard from opening on mobile by removing focus
-    textInput.addEventListener("focus", function(e) {
-      this.blur(); // Remove focus to prevent default keyboard from opening
-    });
+    // // Prevent default keyboard from opening on mobile by removing focus
+    // textInput.addEventListener("focus", function(e) {
+    //   this.blur(); // Remove focus to prevent default keyboard from opening
+    // });
   
 
   if (textInput.value.length >= 4) {
@@ -39,16 +39,16 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-// Prevent default keyboard from opening if possible
-document.getElementById('textInput').addEventListener('focus', function(e) {
-  e.preventDefault(); // Attempt to prevent the default keyboard from opening
-  this.blur(); // Blurring here, assuming custom keyboard will manage focus
-});
+// // Prevent default keyboard from opening if possible
+// document.getElementById('textInput').addEventListener('focus', function(e) {
+//   e.preventDefault(); // Attempt to prevent the default keyboard from opening
+//   this.blur(); // Blurring here, assuming custom keyboard will manage focus
+// });
 
-// Focus back to simulate the custom keyboard input (optional)
-document.querySelector('.keyboard').addEventListener('click', function() {
-  document.getElementById('textInput').focus(); // Bring focus back for custom input
-});
+// // Focus back to simulate the custom keyboard input (optional)
+// document.querySelector('.keyboard').addEventListener('click', function() {
+//   document.getElementById('textInput').focus(); 
+// });
 
 
 // Function to toggle the display of keyboards
@@ -85,12 +85,6 @@ function hideAllKeyboards() {
   }
 }
 
-// // Function to show a specific alternate keyboard
-// function showOtherKeyboard() {
-//   hideAllKeyboards(); // Hide all keyboards
-//   document.getElementById("otherKeyboard").style.display = "flex"; // Display the specific alternate keyboard
-// }
-
 // Function to show the second alternate keyboard (signs) and hide all others
 function showOtherKeyboards() {
   hideAllKeyboards(); // Hide all keyboards
@@ -105,3 +99,16 @@ function showMainKeyboard() {
   document.getElementById("otherKeyboardsigns").style.display = "none"; 
   document.getElementById("keyboard1").style.display = "flex"; // Display the main keyboard
 }
+
+window.onload = function() {
+  // Focus the textarea
+  var textarea = document.getElementById('textInput');
+  
+  // Focus it immediately on load
+  textarea.focus();
+  
+  // Prevent mobile keyboard from opening by blur immediately after a small delay
+  setTimeout(function() {
+    textarea.blur();
+  }, 100); // Delay to let focus happen but prevent keyboard
+};
