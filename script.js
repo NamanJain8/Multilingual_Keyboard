@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
           const char = key.getAttribute("data-char");
           // Focus textInput to enable updates with custom keyboard
           textInput.focus(); 
-          textarea.preventDefault();
+          textInput.preventDefault();
 
           if (char === "←") {
               // Backspace functionality
