@@ -31,8 +31,6 @@
 }
 
 
-
-
 .keyboard button {
   flex: 1 1 10%;
   height: 33px;
@@ -85,11 +83,78 @@ Hover Effect
         height: 33px; 
         font-size: 1.1rem;
     }
+    .keyboardE {
+      max-width: 100%;
+      padding: 6px;
+  }
+
+  .keyboardE button {
+      height: 33px; 
+      font-size: 1.1rem;
+  }
     #onetwothree{
       width: 40px;
 
     } 
+    
 }    
+.keyboardE {
+  position: fixed;       
+  bottom: 0;            
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 700px;
+  height: 290px; 
+  margin: 0; 
+  right: 0;           
+  gap: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #99C0FB;
+  flex-direction: row;
+  overflow: auto;
+}
+
+
+.keyboardE button {
+  flex: 1 1 10%;
+  height: 33px;
+  align-content: stretch;
+  width: 33px;
+  padding: 1px;
+  margin: 0px 0px;
+  font-size: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+  background-image: url('img/Brahmi lipi tools symbol_20241103_163634_0000.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+Hover Effect
+.keyboardE button:hover {
+    background-color: rgba(209, 209, 209, 0.7); 
+}
+
+/* Special Button Styling */
+.keyboardE button.space{
+    flex: 1 1 40%; 
+    max-width: 290%;
+    border-radius: 8px;
+    background-image: url('../Multilingual_Keyboard/img/space_button.png');
+    width: 100px;
+    background-color: transparent;
+
+  } 
 
 
 

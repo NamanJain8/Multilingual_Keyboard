@@ -53,6 +53,7 @@ function toggleKeyboard(keyboardId) {
 
   // Show the selected keyboard
   const selectedKeyboard = document.getElementById(keyboardId);
+  hideAllKeyboards();
   if (selectedKeyboard) {
       selectedKeyboard.style.display = 'flex'; // Show the selected keyboard
       selectedKeyboard.style.flexDirection = 'row'; // Ensure it's in row layout
@@ -76,11 +77,11 @@ function hideAllKeyboards() {
   }
 }
 
-// Function to show a specific alternate keyboard
-function showOtherKeyboard() {
-  hideAllKeyboards(); // Hide all keyboards
-  document.getElementById("otherKeyboard").style.display = "flex"; // Display the specific alternate keyboard
-}
+// // Function to show a specific alternate keyboard
+// function showOtherKeyboard() {
+//   hideAllKeyboards(); // Hide all keyboards
+//   document.getElementById("otherKeyboard").style.display = "flex"; // Display the specific alternate keyboard
+// }
 
 // Function to show the second alternate keyboard (signs) and hide all others
 function showOtherKeyboards() {
