@@ -4,6 +4,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Prevent mobile keyboard by using `readonly`
   textInput.setAttribute("readonly", true);
+   // Ensure it's still focusable
+   textInput.tabIndex = 0;
+   // Handle click/touch events for the input field
+  // Handle click/touch events
+  textInput.addEventListener("click", function(e) {
+    // Prevent default behavior
+    e.preventDefault();
+    
+    // Show your custom keyboard here
+    toggleKeyboard('keyboard1'); // Replace with your custom keyboard function
+  });
+   // Handle touch events for mobile
+   textInput.addEventListener("touchend", function(e) {
+    e.preventDefault();
+    
+    // Show your custom keyboard here
+    toggleKeyboard('keyboard1');  // Replace with your custom keyboard function
+  });
+  // Optional: Prevent any default keyboard behavior
+  textInput.addEventListener("focus", function(e) {
+    e.preventDefault();
+    textInput.blur(); // Remove focus to ensure mobile keyboard doesn't show
+    
+    // Show your custom keyboard here
+    toggleKeyboard('keyboard1'); // Replace with your custom keyboard function
+  });
   
 
   if (textInput.value.length >= 4) {
