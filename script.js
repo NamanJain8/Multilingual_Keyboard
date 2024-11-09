@@ -20,20 +20,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
           if (char === "←") {
               // Backspace functionality
-              textInput.value = textInput.value.slice(0, -1);
-              textInput.value = textInput.value.slice(0, -1);
+              textInput.innerText = textInput.innerText.slice(0, -1);
+              textInput.innerText = textInput.innerText.slice(0, -1);
           }else if (char === "←←") {
-            textInput.value = textInput.value.slice(0, -1);
+            textInput.innerText = textInput.innerText.slice(0, -1);
           }else if (char === "space") {
               // Space functionality
               console.log("Space is pressed");
-              textInput.value += ' ';
+              textInput.innerText += ' ';
           }else if (char === "↩") {
             // Enter functionality (new line)
-            textInput.value += '\n';  // Adds a new line
+            textInput.innerText += '\n';  // Adds a new line
           }else {
               // Insert character
-              textInput.value += char;
+              textInput.innerText += char;
           }
       });
   });
@@ -103,12 +103,7 @@ function showMainKeyboard() {
 window.onload = function() {
   // Focus the textarea
   var textarea = document.getElementById('textInput');
-  
   // Focus it immediately on load
   textarea.focus();
   
-  // Prevent mobile keyboard from opening by blur immediately after a small delay
-  setTimeout(function() {
-    textarea.blur();
-  }, 100); // Delay to let focus happen but prevent keyboard
 };
