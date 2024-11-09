@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // });
   
 
-  if (textInput.value.length >= 4) {
-      textInput.value = textInput.value.slice(0, -4);
-  }
+  // if (textInput.value.length >= 4) {
+  //     textInput.value = textInput.value.slice(0, -4);
+  // }
 
   keys.forEach(key => {
       key.addEventListener("click", () => {
