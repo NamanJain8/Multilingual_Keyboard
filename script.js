@@ -202,7 +202,7 @@ async function downloadPDF() {
     tempContainer.style.position = 'absolute';
     tempContainer.style.left = '-9999px';
     tempContainer.style.top = '-9999px';
-    tempContainer.style.width = '816px'; // A4 width at 96 DPI
+    tempContainer.style.width = '1632px'; // A4 width at 96 DPI
     tempContainer.style.minHeight = '1056px'; // A4 height at 96 DPI
     
     try {
@@ -211,7 +211,7 @@ async function downloadPDF() {
             scale: 2,
             useCORS: true,
             logging: false,
-            windowWidth: 816,
+            windowWidth: 1632,
             windowHeight: 1056
         });
 
