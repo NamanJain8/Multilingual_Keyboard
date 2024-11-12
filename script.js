@@ -133,63 +133,74 @@ window.onload = function() {
 const quill = new Quill('#editor', {
   theme: 'snow',
   modules: {
-      toolbar: [
-          [{ 'font': [] }, { 'size': ['small', false, 'large', 'huge'] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ 'color': [] }, { 'background': [] }],
-          [{ 'script': 'sub'}, { 'script': 'super' }],
-          [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block'],
-          [{ 'list': 'ordered'}, { 'list': 'bullet' },
-           { 'indent': '-1'}, { 'indent': '+1' }],
-          [{ 'direction': 'rtl' }, { 'align': [] }],
-          ['link', 'image', 'formula'],
-          ['clean']
-      ]
+    keyboard: {
+      bindings: {} // Disable default keyboard bindings
+    },
+    toolbar: [
+      [{ 'font': [] }, { 'size': ['small', false, 'large', 'huge'] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'color': [] }, { 'background': [] }],
+      [{ 'script': 'sub'}, { 'script': 'super' }],
+      [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block'],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' },
+       { 'indent': '-1'}, { 'indent': '+1' }],
+      [{ 'direction': 'rtl' }, { 'align': [] }],
+      ['link', 'image', 'formula'],
+      ['clean']
+    ]
   },
   placeholder: 'लिखना शुरू करें।',
 });
 
-// Prevent default keyboard on mobile devices
-const editorElement = document.querySelector('#editor');
-const editorContainer = document.querySelector('.ql-container');
+// Prevent default keyboard on all relevant elements
+function preventKeyboard() {
+  // Get all interactive elements
+  const editorElement = document.querySelector('#editor');
+  const editorContainer = document.querySelector('.ql-container');
+  const keyboardButtons = document.querySelectorAll('.keyboard button');
+  const keyboardContainer = document.querySelectorAll('.keyboard');
 
-// Prevent focus and showing keyboard on iOS
-editorElement.addEventListener('touchstart', function(e) {
-  e.preventDefault();
-  showMainKeyboard(); // Show your custom keyboard
-});
-
-// Prevent focus and showing keyboard on Android
-editorElement.addEventListener('click', function(e) {
-  e.preventDefault();
-  showMainKeyboard(); // Show your custom keyboard
-});
-
-// Add these attributes to prevent mobile keyboard
-editorContainer.setAttribute('readonly', 'readonly');
-editorContainer.setAttribute('inputmode', 'none');
-
-// Additional measures to prevent mobile keyboard
-document.addEventListener('DOMContentLoaded', function() {
-  // Disable contentEditable when touching/clicking
-  const preventKeyboard = function(e) {
-    const editor = quill.root;
-    editor.setAttribute('contenteditable', 'false');
+  // Disable native keyboard functionality
+  editorContainer.setAttribute('readonly', 'readonly');
+  editorContainer.setAttribute('inputmode', 'none');
+  editorElement.setAttribute('inputmode', 'none');
+  
+  // Prevent focus on keyboard buttons
+  keyboardButtons.forEach(button => {
+    button.setAttribute('readonly', 'readonly');
+    button.setAttribute('inputmode', 'none');
     
-    // Re-enable contentEditable after a short delay
-    // This allows Quill to work while preventing keyboard
+    // Prevent default behavior on touch/click
+    button.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    }, true);
+    
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+    }, true);
+  });
+
+  // Prevent keyboard on editor interactions
+  const preventDefaultKeyboard = (e) => {
+    e.preventDefault();
+    quill.root.setAttribute('contenteditable', 'false');
     setTimeout(() => {
-      editor.setAttribute('contenteditable', 'true');
+      quill.root.setAttribute('contenteditable', 'true');
     }, 100);
   };
 
-  editorElement.addEventListener('touchstart', preventKeyboard);
-  editorElement.addEventListener('mousedown', preventKeyboard);
-});
+  editorElement.addEventListener('touchstart', preventDefaultKeyboard, true);
+  editorElement.addEventListener('mousedown', preventDefaultKeyboard, true);
+  editorElement.addEventListener('focus', preventDefaultKeyboard, true);
+}
 
-// Custom keyboard handling (your existing code)
+// Enhanced keyboard button handling
 document.addEventListener("click", function(e) {
   if (e.target.matches('.keyboard button')) {
+    e.preventDefault();
+    e.stopPropagation();
+    
     const char = e.target.getAttribute('data-char');
     const selection = quill.getSelection(true);
     
@@ -209,10 +220,14 @@ document.addEventListener("click", function(e) {
       quill.insertText(selection.index, char);
       quill.setSelection(selection.index + 1);
     }
+    
+    // Ensure focus stays on editor but keyboard doesn't show
+    quill.root.focus();
+    e.target.blur();
   }
-});
+}, true);
 
-// Add this to your CSS
+// Add necessary CSS
 const style = document.createElement('style');
 style.textContent = `
   .ql-container {
@@ -225,9 +240,32 @@ style.textContent = `
   .ql-editor {
     caret-color: transparent;
   }
+  
+  .keyboard button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
+  }
 `;
 document.head.appendChild(style);
 
+// Initialize prevention on page load
+document.addEventListener('DOMContentLoaded', () => {
+  preventKeyboard();
+});
+
+// Additional prevention for dynamically added elements
+const observer = new MutationObserver(() => {
+  preventKeyboard();
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
 
 // Auto-save functionality
 let saveTimeout;
