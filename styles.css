@@ -1,4 +1,16 @@
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+
 #textInput {
   overflow-y: auto;
   scrollbar-width: thin; /* Firefox */
@@ -75,6 +87,7 @@ Hover Effect
     width: 100px;
     background-color: transparent;
 
+
   } 
   #onetwothree{
     font-size: 0.8rem;
@@ -127,6 +140,11 @@ Hover Effect
   overflow: auto;
 }
 
+/* Add support for multiple scripts */
+@font-face {
+  font-family: 'Noto Sans Brahmi';
+  src: url('https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts/unhinted/ttf/NotoSansBrahmi/NotoSansBrahmi-Regular.ttf') format('truetype');
+}
 
 .keyboardE button {
   flex: 1 1 10%;
@@ -207,3 +225,84 @@ Hover Effect
     border-radius: 5px;
     cursor: pointer;
   }
+  .toolbar {
+    background-color: #f7faff;
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#editor-container {
+    /* background-color: #dfe3e6; */
+    background-color: #f4f6f8;
+    min-height: calc(100vh - 120px);
+    padding: 0px;
+    padding-top: 0px;
+}
+
+#editor {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    min-height: 1100px;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    padding: 22%;
+    font-family: 'Noto Sans', 'Noto Sans Devanagari', 'Noto Sans Brahmi', sans-serif !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+/* Ensure Quill editor inherits fonts */
+.ql-editor {
+  font-family: 'Noto Sans', 'Noto Sans Devanagari', 'Noto Sans Brahmi', sans-serif !important;
+  font-size: 20px;
+}
+
+.menu-btn {
+    padding: 8px 12px;
+    background: none;
+    border: black;
+    border-radius: 0px;
+    cursor: pointer;
+}
+
+.menu-btn:hover {
+    background-color: #f1f3f4;
+}
+
+.save-status {
+    color: #187ef9;
+    font-size: 3px;
+    margin-left: auto;
+}
+
+.ql-toolbar.ql-snow {
+    border-bottom: 1px solid #e0e0e0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: #ffffff;
+    padding: 4px !important;
+    font-size: 10px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.ql-container.ql-snow {
+    border: none !important;
+}
+
+ /* Adjust buttons' size */
+ .ql-toolbar .ql-formats button {
+  padding: 4px 6px !important; /* reduce button padding */
+  border-radius: 4px;
+  background-color: 0.2s;
+}
+
+.ql-toolbar .ql-formats button:hover{
+  background-color: #c3d7e0;
+}
+
+.ql-tooltip {
+    left: 0;
+    right: 0;
+}

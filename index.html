@@ -6,15 +6,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brahmi Script Keyboard</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
-<body
-style="background: rgb(240,181,70); background: linear-gradient(90deg, rgba(240,181,70,1) 0%, rgba(255,238,205,1) 48%, rgba(240,181,70,1) 100%);
-  margin: 0; min-height: 100vh; display: flex; flex-direction: column; overflow-y: auto;">
+<body>
+<!-- style="background: rgb(240,181,70); background: linear-gradient(90deg, rgba(240,181,70,1) 0%, rgba(255,238,205,1) 48%, rgba(240,181,70,1) 100%);
+  margin: 0; min-height: 100vh; display: flex; flex-direction: column; overflow-y: auto;" -->
 
   <!-- Fixed Header with Larger Icons -->
-  <header style=" position: fixed ;height: 40px; display: flex; align-items: center; justify-content: space-between; font-family: Arial, sans-serif; color: #4A90E2; padding: 0 15px; background-color: #f6ecec; border-bottom: 2px solid #4A90E2;">
-    <div style="display: flex; gap: 10px; align-items: center; justify-content: center;">
+  <!-- <header style=" position: fixed ;
+                  height: 40px;
+                  display: flex;
+                  align-items: center; 
+                  justify-content: space-between; 
+                  font-family: Arial, 
+                  sans-serif; 
+                  color: #4A90E2; 
+                  padding: 0 15px; 
+                  background-color: #f6ecec; 
+                  border-bottom: 2px solid #4A90E2;">
+    <div style="display: flex; 
+                gap: 10px; 
+                align-items: center; 
+                justify-content: center;">
       <button title="Undo" style="background: none; font-size: 2rem; border: none; cursor: pointer; color: #4A90E2;">↩️</button>
       <button title="Redo" style="background: none; font-size: 2rem; border: none; cursor: pointer; color: #4A90E2;">↪️</button>
       <button title="Format" style="background: none; font-size: 2rem; border: none; cursor: pointer; color: #4A90E2;">📝</button>
@@ -22,10 +38,14 @@ style="background: rgb(240,181,70); background: linear-gradient(90deg, rgba(240,
       <button title="Comment" style="background: none; font-size: 2rem; border: none; cursor: pointer; color: #4A90E2;">💬</button>
       <button title="More Options" style="background: none; font-size: 2rem; border: none; cursor: pointer; color: #4A90E2;">⋮</button>
     </div>
-  </header>
+  </header> -->
+  <div id="editor-container">
+    <div id="editor"></div>
+  </div>
+
 
   <!-- Main Content Area with Full-Width Text Area -->
-  <main style="flex: 1; padding: 0px; display: flex; justify-content: center;">
+  <!-- <main style="flex: 1; padding: 0px; display: flex; justify-content: center;">
     <div style="width: 100%; max-width: 800px;overflow: scroll">
       <div id="textInput"  tabindex="0" readonly="readonly" style="
         width: 100%; 
@@ -44,7 +64,7 @@ style="background: rgb(240,181,70); background: linear-gradient(90deg, rgba(240,
         overflow-y: auto;
       ">                लिखना शुरू करें।</div>
     </div>
-    </main>
+    </main> -->
 
   <div class="keyboard" id="keyboard1" >
     <!-- Row 1 -->
@@ -207,7 +227,7 @@ style="background: rgb(240,181,70); background: linear-gradient(90deg, rgba(240,
     <button data-char="↩">↩</button>
   </div>
 
-  <div id="otherKeyboardsigns" class="keyboard" style="display: none;">
+  <div id="otherKeyboardsigns" class="otherKeyboardsigns" style="display: none;">
     <button data-char="~">~</button>
     <button data-char="`">`</button>
     <button data-char="|">|</button>

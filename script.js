@@ -1,55 +1,94 @@
 
-document.addEventListener("DOMContentLoaded", function() {
-  const textInput = document.getElementById("textInput");
-  const keys = document.querySelectorAll(".keyboard button");
-    // // Prevent default keyboard from opening on mobile by removing focus
-    // textInput.addEventListener("focus", function(e) {
-    //   this.blur(); // Remove focus to prevent default keyboard from opening
-    // });
+// document.addEventListener("DOMContentLoaded", function() {
+//   const textInput = document.getElementById("textInput");
+//   const keys = document.querySelectorAll(".keyboard button");
+
+//   keys.forEach(key => {
+//       key.addEventListener("click", () => {
+//           const char = key.getAttribute("data-char");
+//           // Focus textInput to enable updates with custom keyboard
+//           textInput.focus(); 
+
+
+//           if (char === "←") {
+//               // Backspace functionality
+//               textInput.innerText = textInput.innerText.slice(0, -1);
+//               textInput.innerText = textInput.innerText.slice(0, -1);
+//           }else if (char === "←←") {
+//             textInput.innerText = textInput.innerText.slice(0, -1);
+//           }else if (char === "space") {
+//               // Space functionality
+//               console.log("Space is pressed");
+//               textInput.innerText += ' ';
+//           }else if (char === "↩") {
+//             // Enter functionality (new line)
+//             textInput.innerText += '\n';  // Adds a new line
+//           }else {
+//               // Insert character
+//               textInput.innerText += char;
+//           }
+//       });
+//   });
+// });
+
+// // Custom keyboard handling
+// document.addEventListener("DOMContentLoaded", function() {
+//   const keys = document.querySelectorAll(".keyboard button");
   
+//   keys.forEach(key => {
+//       key.addEventListener("click", () => {
+//           const char = key.getAttribute("data-char");
+//           const selection = quill.getSelection(true);
+          
+//           if (char === "←") {
+//               // Backspace functionality
+//               if (selection.length > 0) {
+//                   quill.deleteText(selection.index, selection.length);
+//               } else if (selection.index > 0) {
+//                   quill.deleteText(selection.index - 1, 1);
+//               }
+//           } else if (char === "space") {
+//               // Space functionality
+//               quill.insertText(selection.index, ' ');
+//               quill.setSelection(selection.index + 1);
+//           } else if (char === "↩") {
+//               // Enter functionality
+//               quill.insertText(selection.index, '\n');
+//               quill.setSelection(selection.index + 1);
+//           } else {
+//               // Insert character
+//               quill.insertText(selection.index, char);
+//               quill.setSelection(selection.index + 1);
+//           }
+//       });
+//   });
+// });
 
-  // if (textInput.value.length >= 4) {
-  //     textInput.value = textInput.value.slice(0, -4);
-  // }
 
-  keys.forEach(key => {
-      key.addEventListener("click", () => {
-          const char = key.getAttribute("data-char");
-          // Focus textInput to enable updates with custom keyboard
-          textInput.focus(); 
-
-
-          if (char === "←") {
-              // Backspace functionality
-              textInput.innerText = textInput.innerText.slice(0, -1);
-              textInput.innerText = textInput.innerText.slice(0, -1);
-          }else if (char === "←←") {
-            textInput.innerText = textInput.innerText.slice(0, -1);
-          }else if (char === "space") {
-              // Space functionality
-              console.log("Space is pressed");
-              textInput.innerText += ' ';
-          }else if (char === "↩") {
-            // Enter functionality (new line)
-            textInput.innerText += '\n';  // Adds a new line
-          }else {
-              // Insert character
-              textInput.innerText += char;
+        // Custom keyboard handling
+        document.addEventListener("click", function(e) {
+          if (e.target.matches('.keyboard button')) {
+              const char = e.target.getAttribute('data-char');
+              const selection = quill.getSelection(true);
+              
+              if (char === "←") {
+                  if (selection.length > 0) {
+                      quill.deleteText(selection.index, selection.length);
+                  } else if (selection.index > 0) {
+                      quill.deleteText(selection.index - 1, 1);
+                  }
+              } else if (char === "space") {
+                  quill.insertText(selection.index, ' ');
+                  quill.setSelection(selection.index + 1);
+              } else if (char === "↩") {
+                  quill.insertText(selection.index, '\n');
+                  quill.setSelection(selection.index + 1);
+              } else {
+                  quill.insertText(selection.index, char);
+                  quill.setSelection(selection.index + 1);
+              }
           }
       });
-  });
-});
-
-// // Prevent default keyboard from opening if possible
-// document.getElementById('textInput').addEventListener('focus', function(e) {
-//   e.preventDefault(); // Attempt to prevent the default keyboard from opening
-//   this.blur(); // Blurring here, assuming custom keyboard will manage focus
-// });
-
-// // Focus back to simulate the custom keyboard input (optional)
-// document.querySelector('.keyboard').addEventListener('click', function() {
-//   document.getElementById('textInput').focus(); 
-// });
 
 
 // Function to toggle the display of keyboards
@@ -121,3 +160,91 @@ window.onload = function() {
 //       event.preventDefault();
 //     });
 };
+
+
+// Initialize Quill with enhanced Unicode support
+const quill = new Quill('#editor', {
+  theme: 'snow',
+  modules: {
+      toolbar: [
+          [{ 'font': [] }, { 'size': ['small', false, 'large', 'huge'] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          [{ 'color': [] }, { 'background': [] }],
+          [{ 'script': 'sub'}, { 'script': 'super' }],
+          [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block'],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' },
+           { 'indent': '-1'}, { 'indent': '+1' }],
+          [{ 'direction': 'rtl' }, { 'align': [] }],
+          ['link', 'image', 'formula'],
+          ['clean']
+      ]
+  },
+  placeholder: '               लिखना शुरू करें।',
+});
+
+// Auto-save functionality
+let saveTimeout;
+const saveStatus = document.querySelector('.save-status');
+
+// quill.on('text-change', function() {
+//   saveStatus.textContent = 'Saving...';
+  
+//   clearTimeout(saveTimeout);
+//   saveTimeout = setTimeout(() => {
+//       // Simulate saving to server
+//       saveDocument();
+//   }, 1000);
+// });
+
+function saveDocument() {
+  // In a real application, this would save to a server
+  const content = quill.getContents();
+  localStorage.setItem('doc-content', JSON.stringify(content));
+  saveStatus.textContent = 'All changes saved';
+}
+
+// Load saved content if it exists
+const savedContent = localStorage.getItem('doc-content');
+if (savedContent) {
+  quill.setContents(JSON.parse(savedContent));
+}
+
+// // Handle document title changes
+// const titleInput = document.querySelector('.doc-title');
+// titleInput.addEventListener('input', function() {
+//   document.title = titleInput.value || 'Untitled document';
+//   saveStatus.textContent = 'Saving...';
+  
+//   clearTimeout(saveTimeout);
+//   saveTimeout = setTimeout(() => {
+//       localStorage.setItem('doc-title', titleInput.value);
+//       saveStatus.textContent = 'All changes saved';
+//   }, 1000);
+// });
+
+// Load saved title if it exists
+const savedTitle = localStorage.getItem('doc-title');
+if (savedTitle) {
+  titleInput.value = savedTitle;
+  document.title = savedTitle;
+}
+
+// Add keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey || e.metaKey) {
+      switch (e.key.toLowerCase()) {
+          case 'b':
+              e.preventDefault();
+              quill.format('bold', !quill.getFormat().bold);
+              break;
+          case 'i':
+              e.preventDefault();
+              quill.format('italic', !quill.getFormat().italic);
+              break;
+          case 'u':
+              e.preventDefault();
+              quill.format('underline', !quill.getFormat().underline);
+              break;
+      }
+  }
+});
