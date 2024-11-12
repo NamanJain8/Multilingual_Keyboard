@@ -154,12 +154,16 @@ const quill = new Quill('#editor', {
         ['bold', 'italic', 'underline', 'strike'],
         [{ 'color': [] }, { 'background': [] }],
         [{ 'script': 'sub' }, { 'script': 'super' }],
-        [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block'],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' },
-          { 'indent': '-1' }, { 'indent': '+1' }],
+        [{ 'header': '1' }, { 'header': '2' }, 'blockquote'
+          // , 'code-block'
+        ],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+          [{ 'indent': '-1' }, { 'indent': '+1' }],
         [{ 'direction': 'rtl' }, { 'align': [] }],
-        ['link', 'image', 'formula'],
-        ['clean'],
+        // ['link'],
+        ['image'],
+        // ['formula'],
+        // ['clean'],
         ['download-pdf']  // Add this new option
       ],
       handlers: {
