@@ -128,71 +128,69 @@ function showMainKeyboard() {
 //     });
 // };
 
-
 // Initialize Quill with enhanced Unicode support
 const quill = new Quill('#editor', {
   theme: 'snow',
   modules: {
-      toolbar: [
-          [{ 'font': [] }, { 'size': ['small', false, 'large', 'huge'] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ 'color': [] }, { 'background': [] }],
-          [{ 'script': 'sub'}, { 'script': 'super' }],
-          [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block'],
-          [{ 'list': 'ordered'}, { 'list': 'bullet' },
-           { 'indent': '-1'}, { 'indent': '+1' }],
-          [{ 'direction': 'rtl' }, { 'align': [] }],
-          ['link', 'image', 'formula'],
-          ['clean']
-      ]
+    toolbar: [
+      [{ 'font': [] }, { 'size': ['small', false, 'large', 'huge'] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'color': [] }, { 'background': [] }],
+      [{ 'script': 'sub' }, { 'script': 'super' }],
+      [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block'],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' },
+        { 'indent': '-1' }, { 'indent': '+1' }],
+      [{ 'direction': 'rtl' }, { 'align': [] }],
+      ['link', 'image', 'formula'],
+      ['clean']
+    ]
   },
   placeholder: 'लिखना शुरू करें।',
 });
 
 // Prevent default keyboard on mobile devices
-const editorElement = document.querySelector('#editor');
+const editorElement = document.querySelector('#editor .ql-editor');
 const editorContainer = document.querySelector('.ql-container');
 
-// Prevent focus and showing keyboard on iOS
-editorElement.addEventListener('touchstart', function(e) {
-  e.preventDefault();
-  showMainKeyboard(); // Show your custom keyboard
-});
-
-// Prevent focus and showing keyboard on Android
-editorElement.addEventListener('click', function(e) {
-  e.preventDefault();
-  showMainKeyboard(); // Show your custom keyboard
-});
-
-// Add these attributes to prevent mobile keyboard
-editorContainer.setAttribute('readonly', 'readonly');
+// Disable mobile keyboard
+editorContainer.setAttribute('readonly', 'true');
 editorContainer.setAttribute('inputmode', 'none');
 
-// Additional measures to prevent mobile keyboard
-document.addEventListener('DOMContentLoaded', function() {
-  // Disable contentEditable when touching/clicking
-  const preventKeyboard = function(e) {
-    const editor = quill.root;
-    editor.setAttribute('contenteditable', 'false');
-    
-    // Re-enable contentEditable after a short delay
-    // This allows Quill to work while preventing keyboard
-    setTimeout(() => {
-      editor.setAttribute('contenteditable', 'true');
-    }, 100);
-  };
+// Disable contentEditable but enable Quill features
+editorElement.setAttribute('contenteditable', 'false');
 
-  editorElement.addEventListener('touchstart', preventKeyboard);
-  editorElement.addEventListener('mousedown', preventKeyboard);
+// Add a blinking cursor effect
+function addBlinkingCursor() {
+  let cursor = document.createElement('span');
+  cursor.classList.add('custom-cursor');
+  cursor.textContent = '|';
+  editorElement.appendChild(cursor);
+
+  // Blinking effect
+  setInterval(() => {
+    cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
+  }, 500);
+}
+
+addBlinkingCursor();
+
+// Handle focus on custom keyboard
+editorElement.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  showMainKeyboard();
+});
+
+editorElement.addEventListener('mousedown', (e) => {
+  e.preventDefault();
+  showMainKeyboard();
 });
 
 // Custom keyboard handling (your existing code)
-document.addEventListener("click", function(e) {
+document.addEventListener("click", function (e) {
   if (e.target.matches('.keyboard button')) {
     const char = e.target.getAttribute('data-char');
     const selection = quill.getSelection(true);
-    
+
     if (char === "←") {
       if (selection.length > 0) {
         quill.deleteText(selection.index, selection.length);
@@ -221,13 +219,26 @@ style.textContent = `
     -ms-user-select: none;
     user-select: none;
   }
-  
+
   .ql-editor {
     caret-color: transparent;
+    position: relative;
+  }
+  
+  .custom-cursor {
+    position: absolute;
+    display: inline;
+    visibility: visible;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
   }
 `;
 document.head.appendChild(style);
-
 
 // Auto-save functionality
 let saveTimeout;
