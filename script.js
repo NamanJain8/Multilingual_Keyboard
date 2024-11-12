@@ -32,30 +32,30 @@
 // });
 
 
-      //   // Custom keyboard handling
-      //   document.addEventListener("click", function(e) {
-      //     if (e.target.matches('.keyboard button')) {
-      //         const char = e.target.getAttribute('data-char');
-      //         const selection = quill.getSelection(true);
+        // Custom keyboard handling
+        document.addEventListener("click", function(e) {
+          if (e.target.matches('.keyboard button')) {
+              const char = e.target.getAttribute('data-char');
+              const selection = quill.getSelection(true);
               
-      //         if (char === "←") {
-      //             if (selection.length > 0) {
-      //                 quill.deleteText(selection.index, selection.length);
-      //             } else if (selection.index > 0) {
-      //                 quill.deleteText(selection.index - 1, 1);
-      //             }
-      //         } else if (char === "space") {
-      //             quill.insertText(selection.index, ' ');
-      //             quill.setSelection(selection.index + 1);
-      //         } else if (char === "↩") {
-      //             quill.insertText(selection.index, '\n');
-      //             quill.setSelection(selection.index + 1);
-      //         } else {
-      //             quill.insertText(selection.index, char);
-      //             quill.setSelection(selection.index + 1);
-      //         }
-      //     }
-      // });
+              if (char === "←") {
+                  if (selection.length > 0) {
+                      quill.deleteText(selection.index, selection.length);
+                  } else if (selection.index > 0) {
+                      quill.deleteText(selection.index - 1, 1);
+                  }
+              } else if (char === "space") {
+                  quill.insertText(selection.index, ' ');
+                  quill.setSelection(selection.index + 1);
+              } else if (char === "↩") {
+                  quill.insertText(selection.index, '\n');
+                  quill.setSelection(selection.index + 1);
+              } else {
+                  quill.insertText(selection.index, char);
+                  quill.setSelection(selection.index + 1);
+              }
+          }
+      });
 
 
 // Function to toggle the display of keyboards
@@ -237,97 +237,97 @@ async function downloadPDF() {
         tempContainer.remove();
     }
 }
-// Prevent default keyboard on mobile devices
-const editorElement = document.querySelector('#editor .ql-editor');
-const editorContainer = document.querySelector('.ql-container');
+// // Prevent default keyboard on mobile devices
+// const editorElement = document.querySelector('#editor .ql-editor');
+// const editorContainer = document.querySelector('.ql-container');
 
-// Disable mobile keyboard
-editorContainer.setAttribute('readonly', 'true');
-editorContainer.setAttribute('inputmode', 'none');
+// // Disable mobile keyboard
+// editorContainer.setAttribute('readonly', 'true');
+// editorContainer.setAttribute('inputmode', 'none');
 
-// Disable contentEditable but enable Quill features
-editorElement.setAttribute('contenteditable', 'false');
+// // Disable contentEditable but enable Quill features
+// editorElement.setAttribute('contenteditable', 'false');
 
-// Add a blinking cursor effect
-function addBlinkingCursor() {
-  let cursor = document.createElement('span');
-  cursor.classList.add('custom-cursor');
-  cursor.textContent = '|';
-  editorElement.appendChild(cursor);
+// // Add a blinking cursor effect
+// function addBlinkingCursor() {
+//   let cursor = document.createElement('span');
+//   cursor.classList.add('custom-cursor');
+//   cursor.textContent = '|';
+//   editorElement.appendChild(cursor);
 
-  // Blinking effect
-  setInterval(() => {
-    cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
-  }, 500);
-}
+//   // Blinking effect
+//   setInterval(() => {
+//     cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
+//   }, 500);
+// }
 
-addBlinkingCursor();
+// addBlinkingCursor();
 
-// Handle focus on custom keyboard
-editorElement.addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  showMainKeyboard();
-});
+// // Handle focus on custom keyboard
+// editorElement.addEventListener('touchstart', (e) => {
+//   e.preventDefault();
+//   showMainKeyboard();
+// });
 
-editorElement.addEventListener('mousedown', (e) => {
-  e.preventDefault();
-  showMainKeyboard();
-});
+// editorElement.addEventListener('mousedown', (e) => {
+//   e.preventDefault();
+//   showMainKeyboard();
+// });
 
-// Custom keyboard handling (your existing code)
-document.addEventListener("click", function (e) {
-  if (e.target.matches('.keyboard button')) {
-    const char = e.target.getAttribute('data-char');
-    const selection = quill.getSelection(true);
+// // Custom keyboard handling (your existing code)
+// document.addEventListener("click", function (e) {
+//   if (e.target.matches('.keyboard button')) {
+//     const char = e.target.getAttribute('data-char');
+//     const selection = quill.getSelection(true);
 
-    if (char === "←") {
-      if (selection.length > 0) {
-        quill.deleteText(selection.index, selection.length);
-      } else if (selection.index > 0) {
-        quill.deleteText(selection.index - 1, 1);
-      }
-    } else if (char === "space") {
-      quill.insertText(selection.index, ' ');
-      quill.setSelection(selection.index + 1);
-    } else if (char === "↩") {
-      quill.insertText(selection.index, '\n');
-      quill.setSelection(selection.index + 1);
-    } else {
-      quill.insertText(selection.index, char);
-      quill.setSelection(selection.index + 1);
-    }
-  }
-});
+//     if (char === "←") {
+//       if (selection.length > 0) {
+//         quill.deleteText(selection.index, selection.length);
+//       } else if (selection.index > 0) {
+//         quill.deleteText(selection.index - 1, 1);
+//       }
+//     } else if (char === "space") {
+//       quill.insertText(selection.index, ' ');
+//       quill.setSelection(selection.index + 1);
+//     } else if (char === "↩") {
+//       quill.insertText(selection.index, '\n');
+//       quill.setSelection(selection.index + 1);
+//     } else {
+//       quill.insertText(selection.index, char);
+//       quill.setSelection(selection.index + 1);
+//     }
+//   }
+// });
 
-// Add this to your CSS
-const style = document.createElement('style');
-style.textContent = `
-  .ql-container {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
+// // Add this to your CSS
+// const style = document.createElement('style');
+// style.textContent = `
+//   .ql-container {
+//     -webkit-user-select: none;
+//     -moz-user-select: none;
+//     -ms-user-select: none;
+//     user-select: none;
+//   }
 
-  .ql-editor {
-    caret-color: transparent;
-    position: relative;
-  }
+//   .ql-editor {
+//     caret-color: transparent;
+//     position: relative;
+//   }
   
-  .custom-cursor {
-    position: absolute;
-    display: inline;
-    visibility: visible;
-    animation: blink 1s step-end infinite;
-  }
+//   .custom-cursor {
+//     position: absolute;
+//     display: inline;
+//     visibility: visible;
+//     animation: blink 1s step-end infinite;
+//   }
 
-  @keyframes blink {
-    50% {
-      opacity: 0;
-    }
-  }
-`;
-document.head.appendChild(style);
+//   @keyframes blink {
+//     50% {
+//       opacity: 0;
+//     }
+//   }
+// `;
+// document.head.appendChild(style);
 
 // Auto-save functionality
 let saveTimeout;
