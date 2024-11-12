@@ -409,6 +409,13 @@ document.addEventListener('keydown', function(e) {
 //   });
 
 
+// Get the editor element (the actual editable div)
+const editorElement = document.querySelector('.ql-editor');
+editorElement.preventDefault();
+
+
+
+
 // Function to prevent keyboard while maintaining focus
 function preventKeyboardKeepFocus() {
   // Set readonly attribute
