@@ -73,6 +73,20 @@ body {
   justify-content: center;
 }
 
+.download-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  margin-bottom: 400px;
+  z-index:1;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.download-btn:hover {
+  background-color: #45a049;
+}
 Hover Effect
 .keyboard button:hover {
     background-color: rgba(209, 209, 209, 0.7); 
@@ -239,6 +253,8 @@ Hover Effect
     padding-top: 0px;
 }
 
+
+
 #editor {
     width: 100%;
     max-width: 100%;
@@ -249,6 +265,7 @@ Hover Effect
     font-family: 'Noto Sans', 'Noto Sans Devanagari', 'Noto Sans Brahmi', sans-serif !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
     padding-top: 70px;
+    
 }
 /* Ensure Quill editor inherits fonts */
 .ql-editor {
@@ -281,11 +298,26 @@ Hover Effect
     width: 100%;
     z-index: 10;
     background-color: #ffffff;
-    padding: 4px !important;
+    padding: 2px !important;
     font-size: 10px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 
-}
+ 
+  }
+
+  .download-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .download-btn:hover {
+    background-color: #45a049;
+  }
+
 
 .ql-container.ql-snow {
     border: none !important;
@@ -293,7 +325,7 @@ Hover Effect
 
  /* Adjust buttons' size */
  .ql-toolbar .ql-formats button {
-  padding: 4px 6px !important; /* reduce button padding */
+  padding: 1px 1px !important; /* reduce button padding */
   border-radius: 4px;
   background-color: 0.2s;
 }

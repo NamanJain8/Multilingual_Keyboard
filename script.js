@@ -128,26 +128,111 @@ function showMainKeyboard() {
 //     });
 // };
 
+// Add loading indicator functions
+function showLoading() {
+  const loadingDiv = document.createElement('div');
+  loadingDiv.className = 'pdf-loading';
+  loadingDiv.innerHTML = 'Generating PDF...';
+  document.body.appendChild(loadingDiv);
+}
+
+function hideLoading() {
+  const loadingDiv = document.querySelector('.pdf-loading');
+  if (loadingDiv) {
+      loadingDiv.remove();
+  }
+}
 // Initialize Quill with enhanced Unicode support
 const quill = new Quill('#editor', {
   theme: 'snow',
   modules: {
-    toolbar: [
-      [{ 'font': [] }, { 'size': ['small', false, 'large', 'huge'] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ 'color': [] }, { 'background': [] }],
-      [{ 'script': 'sub' }, { 'script': 'super' }],
-      [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block'],
-      [{ 'list': 'ordered' }, { 'list': 'bullet' },
-        { 'indent': '-1' }, { 'indent': '+1' }],
-      [{ 'direction': 'rtl' }, { 'align': [] }],
-      ['link', 'image', 'formula'],
-      ['clean']
-    ]
+    toolbar: {
+      container: [
+        [{ 'font': [] },
+        { 'size': ['10px', '12px', '14px', '18px', '24px']}
+      ],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],
+        [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block'],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' },
+          { 'indent': '-1' }, { 'indent': '+1' }],
+        [{ 'direction': 'rtl' }, { 'align': [] }],
+        ['link', 'image', 'formula'],
+        ['clean'],
+        ['download-pdf']  // Add this new option
+      ],
+      handlers: {
+        'download-pdf': function() {
+          downloadPDF();
+        }
+      }
+    }
   },
   placeholder: 'लिखना शुरू करें।',
 });
 
+// Add the PDF download button icon
+const customButton = document.querySelector('.ql-download-pdf');
+if (customButton) {
+    customButton.innerHTML = `
+        <svg viewBox="0 0 24 24" width="18" height="18">
+            <path fill="currentColor" d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+        </svg>
+    `;
+    customButton.setAttribute('title', 'Download PDF');
+}
+
+// Add the PDF download function
+async function downloadPDF() {
+    // Create a clone of the editor content
+    const editorContent = document.querySelector('.ql-editor');
+    const clone = editorContent.cloneNode(true);
+    
+    // Create a temporary container
+    const tempContainer = document.createElement('div');
+    tempContainer.appendChild(clone);
+    document.body.appendChild(tempContainer);
+    
+    // Style the temporary container
+    tempContainer.style.position = 'absolute';
+    tempContainer.style.left = '-9999px';
+    tempContainer.style.top = '-9999px';
+    tempContainer.style.width = '816px'; // A4 width at 96 DPI
+    tempContainer.style.minHeight = '1056px'; // A4 height at 96 DPI
+    
+    try {
+        // Convert to canvas
+        const canvas = await html2canvas(clone, {
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            windowWidth: 816,
+            windowHeight: 1056
+        });
+
+        // Initialize PDF
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'pt', 'a4');
+        
+        // Calculate dimensions
+        const imgWidth = 595.28; // A4 width in points
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        
+        // Add image to PDF
+        const imgData = canvas.toDataURL('image/png');
+        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        
+        // Save PDF
+        pdf.save('document.pdf');
+        
+    } catch (error) {
+        console.error('Error generating PDF:', error);
+    } finally {
+        // Clean up
+        tempContainer.remove();
+    }
+}
 // Prevent default keyboard on mobile devices
 const editorElement = document.querySelector('#editor .ql-editor');
 const editorContainer = document.querySelector('.ql-container');
