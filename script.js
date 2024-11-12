@@ -395,3 +395,60 @@ document.addEventListener('keydown', function(e) {
       }
   }
 });
+// // Variable to control whether to allow the keyboard
+// let allowKeyboard = false;
+//   // Event listener to prevent default keyboard
+//   const editor = document.getElementById('editor');
+//   editor.addEventListener('focus', function(event) {
+//     if (!allowKeyboard) {
+//       // Prevent the default on-screen keyboard
+//       event.preventDefault();
+//       editor.blur(); // Optionally remove focus to avoid any blinking cursor
+//       console.log("Default keyboard prevented");
+//     }
+//   });
+
+
+// Function to prevent keyboard while maintaining focus
+function preventKeyboardKeepFocus() {
+  // Set readonly attribute
+  editorElement.setAttribute('readonly', 'readonly');
+  
+  // Prevent keyboard on iOS and Android
+  editorElement.setAttribute('inputmode', 'none');
+  
+  // Add additional attributes to prevent mobile keyboards
+  editorElement.setAttribute('contenteditable', 'true');
+  editorElement.style.userSelect = 'text';  // Allows text selection
+  
+  // Prevent default on touch events
+  editorElement.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    // Keep focus
+    this.focus();
+  }, { passive: false });
+
+  // Prevent keyboard but maintain focus on click
+  editorElement.addEventListener('click', function(e) {
+    e.preventDefault();
+    // Keep focus
+    this.focus();
+  });
+
+  // Optional: Maintain cursor visibility
+  editorElement.style.caretColor = 'auto';  // Shows cursor
+  
+  // Prevent keyboard on focus
+  editorElement.addEventListener('focus', function(e) {
+    // No need to prevent default or blur
+    // Just let it maintain focus without keyboard
+  });
+}
+
+// Initialize the keyboard prevention
+preventKeyboardKeepFocus();
+
+// If you need to programmatically focus the editor:
+function focusEditor() {
+  editorElement.focus();
+}
