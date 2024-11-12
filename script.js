@@ -87,7 +87,7 @@ function hideAllKeyboards() {
 }
 
 // Function to show the second alternate keyboard (signs) and hide all others
-function showOtherKeyboards() {
+function showOtherKeyboard() {
   hideAllKeyboards(); // Hide all keyboards
   document.getElementById("otherKeyboard").style.display = "none";
   document.getElementById("otherKeyboardsigns").style.display = "flex"; // Show the second alternate keyboard
