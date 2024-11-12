@@ -179,7 +179,7 @@ const quill = new Quill('#editor', {
           ['clean']
       ]
   },
-  placeholder: '               लिखना शुरू करें।',
+  placeholder: 'लिखना शुरू करें।',
 });
 
 // Auto-save functionality
