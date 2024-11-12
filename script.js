@@ -31,64 +31,31 @@
 //   });
 // });
 
-// // Custom keyboard handling
-// document.addEventListener("DOMContentLoaded", function() {
-//   const keys = document.querySelectorAll(".keyboard button");
-  
-//   keys.forEach(key => {
-//       key.addEventListener("click", () => {
-//           const char = key.getAttribute("data-char");
-//           const selection = quill.getSelection(true);
-          
-//           if (char === "←") {
-//               // Backspace functionality
-//               if (selection.length > 0) {
-//                   quill.deleteText(selection.index, selection.length);
-//               } else if (selection.index > 0) {
-//                   quill.deleteText(selection.index - 1, 1);
-//               }
-//           } else if (char === "space") {
-//               // Space functionality
-//               quill.insertText(selection.index, ' ');
-//               quill.setSelection(selection.index + 1);
-//           } else if (char === "↩") {
-//               // Enter functionality
-//               quill.insertText(selection.index, '\n');
-//               quill.setSelection(selection.index + 1);
-//           } else {
-//               // Insert character
-//               quill.insertText(selection.index, char);
-//               quill.setSelection(selection.index + 1);
-//           }
-//       });
-//   });
-// });
 
-
-        // Custom keyboard handling
-        document.addEventListener("click", function(e) {
-          if (e.target.matches('.keyboard button')) {
-              const char = e.target.getAttribute('data-char');
-              const selection = quill.getSelection(true);
+      //   // Custom keyboard handling
+      //   document.addEventListener("click", function(e) {
+      //     if (e.target.matches('.keyboard button')) {
+      //         const char = e.target.getAttribute('data-char');
+      //         const selection = quill.getSelection(true);
               
-              if (char === "←") {
-                  if (selection.length > 0) {
-                      quill.deleteText(selection.index, selection.length);
-                  } else if (selection.index > 0) {
-                      quill.deleteText(selection.index - 1, 1);
-                  }
-              } else if (char === "space") {
-                  quill.insertText(selection.index, ' ');
-                  quill.setSelection(selection.index + 1);
-              } else if (char === "↩") {
-                  quill.insertText(selection.index, '\n');
-                  quill.setSelection(selection.index + 1);
-              } else {
-                  quill.insertText(selection.index, char);
-                  quill.setSelection(selection.index + 1);
-              }
-          }
-      });
+      //         if (char === "←") {
+      //             if (selection.length > 0) {
+      //                 quill.deleteText(selection.index, selection.length);
+      //             } else if (selection.index > 0) {
+      //                 quill.deleteText(selection.index - 1, 1);
+      //             }
+      //         } else if (char === "space") {
+      //             quill.insertText(selection.index, ' ');
+      //             quill.setSelection(selection.index + 1);
+      //         } else if (char === "↩") {
+      //             quill.insertText(selection.index, '\n');
+      //             quill.setSelection(selection.index + 1);
+      //         } else {
+      //             quill.insertText(selection.index, char);
+      //             quill.setSelection(selection.index + 1);
+      //         }
+      //     }
+      // });
 
 
 // Function to toggle the display of keyboards
@@ -181,6 +148,86 @@ const quill = new Quill('#editor', {
   },
   placeholder: 'लिखना शुरू करें।',
 });
+
+// Prevent default keyboard on mobile devices
+const editorElement = document.querySelector('#editor');
+const editorContainer = document.querySelector('.ql-container');
+
+// Prevent focus and showing keyboard on iOS
+editorElement.addEventListener('touchstart', function(e) {
+  e.preventDefault();
+  showMainKeyboard(); // Show your custom keyboard
+});
+
+// Prevent focus and showing keyboard on Android
+editorElement.addEventListener('click', function(e) {
+  e.preventDefault();
+  showMainKeyboard(); // Show your custom keyboard
+});
+
+// Add these attributes to prevent mobile keyboard
+editorContainer.setAttribute('readonly', 'readonly');
+editorContainer.setAttribute('inputmode', 'none');
+
+// Additional measures to prevent mobile keyboard
+document.addEventListener('DOMContentLoaded', function() {
+  // Disable contentEditable when touching/clicking
+  const preventKeyboard = function(e) {
+    const editor = quill.root;
+    editor.setAttribute('contenteditable', 'false');
+    
+    // Re-enable contentEditable after a short delay
+    // This allows Quill to work while preventing keyboard
+    setTimeout(() => {
+      editor.setAttribute('contenteditable', 'true');
+    }, 100);
+  };
+
+  editorElement.addEventListener('touchstart', preventKeyboard);
+  editorElement.addEventListener('mousedown', preventKeyboard);
+});
+
+// Custom keyboard handling (your existing code)
+document.addEventListener("click", function(e) {
+  if (e.target.matches('.keyboard button')) {
+    const char = e.target.getAttribute('data-char');
+    const selection = quill.getSelection(true);
+    
+    if (char === "←") {
+      if (selection.length > 0) {
+        quill.deleteText(selection.index, selection.length);
+      } else if (selection.index > 0) {
+        quill.deleteText(selection.index - 1, 1);
+      }
+    } else if (char === "space") {
+      quill.insertText(selection.index, ' ');
+      quill.setSelection(selection.index + 1);
+    } else if (char === "↩") {
+      quill.insertText(selection.index, '\n');
+      quill.setSelection(selection.index + 1);
+    } else {
+      quill.insertText(selection.index, char);
+      quill.setSelection(selection.index + 1);
+    }
+  }
+});
+
+// Add this to your CSS
+const style = document.createElement('style');
+style.textContent = `
+  .ql-container {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .ql-editor {
+    caret-color: transparent;
+  }
+`;
+document.head.appendChild(style);
+
 
 // Auto-save functionality
 let saveTimeout;
