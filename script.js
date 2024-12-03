@@ -168,7 +168,16 @@ const quill = new Quill('#editor', {
       ],
       handlers: {
         'download-pdf': function() {
-          downloadPDF();
+          const userChoice = prompt('Choose download format:\n1. PDF\n2. Image\nType "1" for PDF or "2" for Image');
+          if (userChoice === '1') {
+            // User wants to save as PDF
+            downloadPDF();
+          } else if (userChoice === '2') {
+            // User wants to save as Image
+            downloadPNG();
+          } else {
+            alert('Invalid choice. Please type "1" for PDF or "2" for Image.');
+          }
         }
       }
     }
@@ -236,6 +245,49 @@ async function downloadPDF() {
         // Clean up
         tempContainer.remove();
     }
+}
+
+async function downloadPNG() {
+  // Create a clone of the editor content
+  const editorContent = document.querySelector('.ql-editor');
+  const clone = editorContent.cloneNode(true);
+  
+  // Create a temporary container
+  const tempContainer = document.createElement('div');
+  tempContainer.appendChild(clone);
+  document.body.appendChild(tempContainer);
+  
+  // Style the temporary container
+  tempContainer.style.position = 'absolute';
+  tempContainer.style.left = '-9999px';
+  tempContainer.style.top = '-9999px';
+  tempContainer.style.width = '1632px'; // A4 width at 96 DPI
+  tempContainer.style.minHeight = '1056px'; // A4 height at 96 DPI
+  
+  try {
+      // Convert to canvas
+      const canvas = await html2canvas(clone, {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          windowWidth: 1632,
+          windowHeight: 1056
+      });
+      
+      const imgData = canvas.toDataURL('image/png');
+      // Create a temporary link to trigger the download without showing the link to the user
+      const link = document.createElement('a');
+      link.href = imgData;
+      link.download = 'brahmi-image.png'; // Filename for the image
+
+      // Trigger the download directly
+      link.click();
+  } catch (error) {
+      console.error('Error generating PNG:', error);
+  } finally {
+      // Clean up
+      tempContainer.remove();
+  }
 }
 // // Prevent default keyboard on mobile devices
 // const editorElement = document.querySelector('#editor .ql-editor');
