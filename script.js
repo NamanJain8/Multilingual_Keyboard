@@ -45,14 +45,14 @@
                       quill.deleteText(selection.index - 1, 1);
                   }
               } else if (char === "space") {
-                  quill.insertText(selection.index, ' ');
-                  quill.setSelection(selection.index + 1);
+                  quill.insertText(selection.index, '  ');
+                  quill.setSelection(selection.index + 2);
               } else if (char === "↩") {
                   quill.insertText(selection.index, '\n');
                   quill.setSelection(selection.index + 1);
               } else {
                   quill.insertText(selection.index, char);
-                  quill.setSelection(selection.index + 1);
+                  quill.setSelection(selection.index + char.length);
               }
           }
       });
@@ -158,8 +158,8 @@ const quill = new Quill('#editor', {
           // , 'code-block'
         ],
         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-          [{ 'indent': '-1' }, { 'indent': '+1' }],
-        [{ 'direction': 'rtl' }, { 'align': [] }],
+        [{ 'indent': '-1' }, { 'indent': '+1' }],
+        // [{ 'direction': 'ltr' }, { 'align': [] }],
         // ['link'],
         ['image'],
         // ['formula'],
