@@ -145,6 +145,7 @@ function hideLoading() {
 // Initialize Quill with enhanced Unicode support
 const quill = new Quill('#editor', {
   theme: 'snow',
+  readOnly: true,
   modules: {
     toolbar: {
       container: [
