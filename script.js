@@ -459,9 +459,13 @@ document.addEventListener('keydown', function(e) {
 //     }
 //   });
 
-
-const editorElement = document.querySelector('.ql-editor');
-editorElement.preventDefault();
+// Listen for focus events on the editor
+let lastSelection = null;
+quill.root.addEventListener('focus', function(e) {
+  lastSelection = quill.getSelection(true);  // Store the current cursor position
+  e.preventDefault();  // Prevent the keyboard from appearing
+  quill.setSelection(lastSelection.index, lastSelection.length);  // Restore the cursor position immediately
+});
 
 // // Get the editor element (the actual editable div)
 // const editorElement = document.querySelector('.ql-editor');
