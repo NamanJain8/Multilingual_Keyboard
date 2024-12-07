@@ -33,6 +33,7 @@
 
 // Custom keyboard handling
 document.addEventListener("click", function(e) {
+  e.preventDefault()
   if (e.target.matches('.keyboard button')) {
       const char = e.target.getAttribute('data-char');
       const selection = quill.getSelection(true);
@@ -144,7 +145,7 @@ function hideLoading() {
 // Initialize Quill with enhanced Unicode support
 const quill = new Quill('#editor', {
   theme: 'snow',
-  readOnly: true,
+  // readOnly: true,
   modules: {
     toolbar: {
       container: [
@@ -306,9 +307,9 @@ async function downloadPNG() {
 //   editorElement.appendChild(cursor);
 
 //   // Blinking effect
-//   setInterval(() => {
-//     cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
-//   }, 500);
+//   // setInterval(() => {
+//   //   cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
+//   // }, 500);
 // }
 
 // addBlinkingCursor();
@@ -459,63 +460,65 @@ document.addEventListener('keydown', function(e) {
 //   });
 
 // Listen for focus events on the editor
-let lastSelection = null;
-quill.root.addEventListener('focus', function(e) {
-  lastSelection = quill.getSelection(true);  // Store the current cursor position
-  e.preventDefault();  // Prevent the keyboard from appearing
-  quill.setSelection(lastSelection.index, lastSelection.length);  // Restore the cursor position immediately
-});
+// let lastSelection = null;
+// quill.root.addEventListener('focus', function(e) {
+//   lastSelection = quill.getSelection(true);  // Store the current cursor position
+//   e.preventDefault();  // Prevent the keyboard from appearing
+//   quill.setSelection(lastSelection.index, lastSelection.length);  // Restore the cursor position immediately
+// });
 
-quill.root.addEventListener('mousedown', function(e) {
-  console.log("mouse down event")
-  lastSelection = quill.getSelection(true);  // Store the current cursor position
-  e.preventDefault();  // Prevent the keyboard from appearing
-  quill.setSelection(lastSelection.index, lastSelection.length);  // Restore the cursor position immediately
-});
+// const editorElement = document.querySelector('.ql-editor');
+
+// editorElement.addEventListener('mousedown', function(e) {
+//   console.log("mouse down event")
+//   lastSelection = quill.getSelection(true);  // Store the current cursor position
+//   e.preventDefault();  // Prevent the keyboard from appearing
+//   quill.setSelection(lastSelection.index, lastSelection.length);  // Restore the cursor position immediately
+// });
 
 // Get the editor element (the actual editable div)
-const editorElement = document.querySelector('.ql-editor');
+// const editorElement = document.querySelector('.ql-editor');
 // editorElement.preventDefault();
 
 // Function to prevent keyboard while maintaining focus
-function preventKeyboardKeepFocus() {
-  console.log("prevening")
-  // Set readonly attribute
-  // editorElement.setAttribute('readonly', 'readonly');
+// function preventKeyboardKeepFocus() {
+//   console.log("prevening")
+//   // Set readonly attribute
+//   // editorElement.setAttribute('readonly', 'readonly');
   
-  // Prevent keyboard on iOS and Android
-  // editorElement.setAttribute('inputmode', 'none');
+//   // Prevent keyboard on iOS and Android
+//   // editorElement.setAttribute('inputmode', 'none');
   
-  // Add additional attributes to prevent mobile keyboards
-  editorElement.setAttribute('contenteditable', 'true');
-  // editorElement.style.userSelect = 'text';  // Allows text selection
+//   // Add additional attributes to prevent mobile keyboards
+//   // editorElement.setAttribute('contenteditable', 'true');
+//   // editorElement.style.userSelect = 'text';  // Allows text selection
   
-  // Prevent default on touch events
-  // editorElement.addEventListener('touchstart', function(e) {
-  //   e.preventDefault();
-  //   // Keep focus
-  //   this.focus();
-  // }, { passive: false });
+//   // Prevent default on touch events
+//   // editorElement.addEventListener('touchstart', function(e) {
+//   //   e.preventDefault();
+//   //   // Keep focus
+//   //   this.focus();
+//   // }, { passive: false });
 
-  // // Prevent keyboard but maintain focus on click
-  // editorElement.addEventListener('click', function(e) {
-  //   e.preventDefault();
-  //   // Keep focus
-  //   this.focus();
-  // });
+//   // // Prevent keyboard but maintain focus on click
+//   // editorElement.addEventListener('click', function(e) {
+//   //   e.preventDefault();
+//   //   // Keep focus
+//   //   this.focus();
+//   // });
 
-  // // Optional: Maintain cursor visibility
-  // editorElement.style.caretColor = 'auto';  // Shows cursor
+//   // // Optional: Maintain cursor visibility
+//   // editorElement.style.caretColor = 'auto';  // Shows cursor
   
-  // // Prevent keyboard on focus
-  // editorElement.addEventListener('focus', function(e) {
-  //   // No need to prevent default or blur
-  //   // Just let it maintain focus without keyboard
-  // });
-}
+//   // // Prevent keyboard on focus
+//   // editorElement.addEventListener('focus', function(e) {
+//   //   // No need to prevent default or blur
+//   //   // Just let it maintain focus without keyboard
+//   // });
+// }
 
-// Initialize the keyboard prevention
-preventKeyboardKeepFocus();
+// // Initialize the keyboard prevention
+// preventKeyboardKeepFocus();
 
 // // If you need to programmatically focus the editor:
 // function focusEditor() {
