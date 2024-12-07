@@ -57,13 +57,13 @@ document.addEventListener("click", function(e) {
   }
 });
 
-document.addEventListener("mousedown", function(e) {
-  e.preventDefault()
-})
+// document.addEventListener("mousedown", function(e) {
+//   e.preventDefault()
+// })
 
-document.addEventListener("focus", function(e) {
-  e.preventDefault()
-})
+// document.addEventListener("focus", function(e) {
+//   e.preventDefault()
+// })
 
 // Function to toggle the display of keyboards
 function toggleKeyboard(keyboardId) {
@@ -190,6 +190,7 @@ const quill = new Quill('#editor', {
   },
   placeholder: 'लिखना शुरू करें।',
 });
+quill.container.tabIndex = -1;
 
 // Add the PDF download button icon
 const customButton = document.querySelector('.ql-download-pdf');
