@@ -31,30 +31,30 @@
 //   });
 // });
 
-        // Custom keyboard handling
-        document.addEventListener("click", function(e) {
-          if (e.target.matches('.keyboard button')) {
-              const char = e.target.getAttribute('data-char');
-              const selection = quill.getSelection(true);
-              
-              if (char === "←") {
-                  if (selection.length > 0) {
-                      quill.deleteText(selection.index, selection.length);
-                  } else if (selection.index > 0) {
-                      quill.deleteText(selection.index - 1, 1);
-                  }
-              } else if (char === "space") {
-                  quill.insertText(selection.index, '  ');
-                  quill.setSelection(selection.index + 2);
-              } else if (char === "↩") {
-                  quill.insertText(selection.index, '\n');
-                  quill.setSelection(selection.index + 1);
-              } else {
-                  quill.insertText(selection.index, char);
-                  quill.setSelection(selection.index + char.length);
-              }
+// Custom keyboard handling
+document.addEventListener("click", function(e) {
+  if (e.target.matches('.keyboard button')) {
+      const char = e.target.getAttribute('data-char');
+      const selection = quill.getSelection(true);
+      
+      if (char === "←") {
+          if (selection.length > 0) {
+              quill.deleteText(selection.index, selection.length);
+          } else if (selection.index > 0) {
+              quill.deleteText(selection.index - 1, 1);
           }
-      });
+      } else if (char === "space") {
+          quill.insertText(selection.index, '  ');
+          quill.setSelection(selection.index + 2);
+      } else if (char === "↩") {
+          quill.insertText(selection.index, '\n');
+          quill.setSelection(selection.index + 1);
+      } else {
+          quill.insertText(selection.index, char);
+          quill.setSelection(selection.index + char.length);
+      }
+  }
+});
 
 
 // Function to toggle the display of keyboards
@@ -145,7 +145,6 @@ function hideLoading() {
 const quill = new Quill('#editor', {
   theme: 'snow',
   readOnly: true,
-  // contenteditable: true,
   modules: {
     toolbar: {
       container: [
@@ -288,8 +287,8 @@ async function downloadPNG() {
       tempContainer.remove();
   }
 }
-// // Prevent default keyboard on mobile devices
-// const editorElement = document.querySelector('#editor .ql-editor');
+// Prevent default keyboard on mobile devices
+// const editorElement = document.querySelector('.ql-editor');
 // const editorContainer = document.querySelector('.ql-container');
 
 // // Disable mobile keyboard
@@ -297,7 +296,7 @@ async function downloadPNG() {
 // editorContainer.setAttribute('inputmode', 'none');
 
 // // Disable contentEditable but enable Quill features
-// editorElement.setAttribute('contenteditable', 'false');
+// editorElement.setAttribute('contenteditable', 'true');
 
 // // Add a blinking cursor effect
 // function addBlinkingCursor() {
@@ -460,55 +459,56 @@ document.addEventListener('keydown', function(e) {
 //   });
 
 // Listen for focus events on the editor
-// let lastSelection = null;
-// quill.root.addEventListener('focus', function(e) {
-//   lastSelection = quill.getSelection(true);  // Store the current cursor position
-//   e.preventDefault();  // Prevent the keyboard from appearing
-//   quill.setSelection(lastSelection.index, lastSelection.length);  // Restore the cursor position immediately
-// });
+let lastSelection = null;
+quill.root.addEventListener('focus', function(e) {
+  lastSelection = quill.getSelection(true);  // Store the current cursor position
+  e.preventDefault();  // Prevent the keyboard from appearing
+  quill.setSelection(lastSelection.index, lastSelection.length);  // Restore the cursor position immediately
+});
 
-// // Get the editor element (the actual editable div)
-// const editorElement = document.querySelector('.ql-editor');
+// Get the editor element (the actual editable div)
+const editorElement = document.querySelector('.ql-editor');
 // editorElement.preventDefault();
 
-// // Function to prevent keyboard while maintaining focus
-// function preventKeyboardKeepFocus() {
-//   // Set readonly attribute
-//   editorElement.setAttribute('readonly', 'readonly');
+// Function to prevent keyboard while maintaining focus
+function preventKeyboardKeepFocus() {
+  console.log("prevening")
+  // Set readonly attribute
+  // editorElement.setAttribute('readonly', 'readonly');
   
-//   // Prevent keyboard on iOS and Android
-//   editorElement.setAttribute('inputmode', 'none');
+  // Prevent keyboard on iOS and Android
+  // editorElement.setAttribute('inputmode', 'none');
   
-//   // Add additional attributes to prevent mobile keyboards
-//   editorElement.setAttribute('contenteditable', 'true');
-//   editorElement.style.userSelect = 'text';  // Allows text selection
+  // Add additional attributes to prevent mobile keyboards
+  editorElement.setAttribute('contenteditable', 'true');
+  // editorElement.style.userSelect = 'text';  // Allows text selection
   
-//   // Prevent default on touch events
-//   editorElement.addEventListener('touchstart', function(e) {
-//     e.preventDefault();
-//     // Keep focus
-//     this.focus();
-//   }, { passive: false });
+  // Prevent default on touch events
+  // editorElement.addEventListener('touchstart', function(e) {
+  //   e.preventDefault();
+  //   // Keep focus
+  //   this.focus();
+  // }, { passive: false });
 
-//   // Prevent keyboard but maintain focus on click
-//   editorElement.addEventListener('click', function(e) {
-//     e.preventDefault();
-//     // Keep focus
-//     this.focus();
-//   });
+  // // Prevent keyboard but maintain focus on click
+  // editorElement.addEventListener('click', function(e) {
+  //   e.preventDefault();
+  //   // Keep focus
+  //   this.focus();
+  // });
 
-//   // Optional: Maintain cursor visibility
-//   editorElement.style.caretColor = 'auto';  // Shows cursor
+  // // Optional: Maintain cursor visibility
+  // editorElement.style.caretColor = 'auto';  // Shows cursor
   
-//   // Prevent keyboard on focus
-//   editorElement.addEventListener('focus', function(e) {
-//     // No need to prevent default or blur
-//     // Just let it maintain focus without keyboard
-//   });
-// }
+  // // Prevent keyboard on focus
+  // editorElement.addEventListener('focus', function(e) {
+  //   // No need to prevent default or blur
+  //   // Just let it maintain focus without keyboard
+  // });
+}
 
-// // Initialize the keyboard prevention
-// preventKeyboardKeepFocus();
+// Initialize the keyboard prevention
+preventKeyboardKeepFocus();
 
 // // If you need to programmatically focus the editor:
 // function focusEditor() {
