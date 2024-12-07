@@ -12,10 +12,47 @@
   <link rel="stylesheet" href="styles2.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+  <style>
+    /* Disable text selection and input focus */
+    input, textarea {
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        pointer-events: none;
+    }
+</style>
 </head>
 
 <body>
+  <script>
+    // Function to disable keyboard on specific elements
+    function disableAndroidKeyboard() {
+        // Prevent default keyboard on input and textarea elements
+        const inputElements = document.querySelectorAll('input, textarea');
+        inputElements.forEach(element => {
+            element.addEventListener('focus', (e) => {
+                e.preventDefault();
+                element.blur();
+            });
+
+            // Disable keyboard-related attributes
+            element.setAttribute('readonly', 'readonly');
+            element.setAttribute('tabindex', '-1');
+        });
+
+        // Prevent keyboard from appearing on mobile
+        document.body.addEventListener('touchstart', (e) => {
+            if (e.target.tagName.toLowerCase() === 'input' || 
+                e.target.tagName.toLowerCase() === 'textarea') {
+                e.preventDefault();
+            }
+        });
+    }
+
+    // Run the function when the page loads
+    document.addEventListener('DOMContentLoaded', disableAndroidKeyboard);
+</script>
 <!-- style="background: rgb(240,181,70); background: linear-gradient(90deg, rgba(240,181,70,1) 0%, rgba(255,238,205,1) 48%, rgba(240,181,70,1) 100%);
   margin: 0; min-height: 100vh; display: flex; flex-direction: column; overflow-y: auto;" -->
 
