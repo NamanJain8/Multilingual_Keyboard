@@ -57,6 +57,13 @@ document.addEventListener("click", function(e) {
   }
 });
 
+document.addEventListener("mousedown", function(e) {
+  e.preventDefault()
+})
+
+document.addEventListener("focus", function(e) {
+  e.preventDefault()
+})
 
 // Function to toggle the display of keyboards
 function toggleKeyboard(keyboardId) {
