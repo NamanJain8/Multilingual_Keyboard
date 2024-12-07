@@ -144,7 +144,7 @@ function hideLoading() {
 // Initialize Quill with enhanced Unicode support
 const quill = new Quill('#editor', {
   theme: 'snow',
-  // readOnly: true,
+  readOnly: true,
   // contenteditable: true,
   modules: {
     toolbar: {
@@ -447,17 +447,17 @@ document.addEventListener('keydown', function(e) {
   }
 });
 // Variable to control whether to allow the keyboard
-let allowKeyboard = false;
-  // Event listener to prevent default keyboard
-  const editor = document.getElementById('editor');
-  editor.addEventListener('focus', function(event) {
-    if (!allowKeyboard) {
-      // Prevent the default on-screen keyboard
-      event.preventDefault();
-      editor.blur(); // Optionally remove focus to avoid any blinking cursor
-      console.log("Default keyboard prevented");
-    }
-  });
+// let allowKeyboard = false;
+//   // Event listener to prevent default keyboard
+//   const editor = document.getElementById('editor');
+//   editor.addEventListener('focus', function(event) {
+//     if (!allowKeyboard) {
+//       // Prevent the default on-screen keyboard
+//       event.preventDefault();
+//       editor.blur(); // Optionally remove focus to avoid any blinking cursor
+//       console.log("Default keyboard prevented");
+//     }
+//   });
 
 // Listen for focus events on the editor
 // let lastSelection = null;
