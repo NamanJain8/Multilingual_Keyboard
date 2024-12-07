@@ -446,26 +446,26 @@ document.addEventListener('keydown', function(e) {
       }
   }
 });
-// // Variable to control whether to allow the keyboard
-// let allowKeyboard = false;
-//   // Event listener to prevent default keyboard
-//   const editor = document.getElementById('editor');
-//   editor.addEventListener('focus', function(event) {
-//     if (!allowKeyboard) {
-//       // Prevent the default on-screen keyboard
-//       event.preventDefault();
-//       editor.blur(); // Optionally remove focus to avoid any blinking cursor
-//       console.log("Default keyboard prevented");
-//     }
-//   });
+// Variable to control whether to allow the keyboard
+let allowKeyboard = false;
+  // Event listener to prevent default keyboard
+  const editor = document.getElementById('editor');
+  editor.addEventListener('focus', function(event) {
+    if (!allowKeyboard) {
+      // Prevent the default on-screen keyboard
+      event.preventDefault();
+      editor.blur(); // Optionally remove focus to avoid any blinking cursor
+      console.log("Default keyboard prevented");
+    }
+  });
 
 // Listen for focus events on the editor
-let lastSelection = null;
-quill.root.addEventListener('focus', function(e) {
-  lastSelection = quill.getSelection(true);  // Store the current cursor position
-  e.preventDefault();  // Prevent the keyboard from appearing
-  quill.setSelection(lastSelection.index, lastSelection.length);  // Restore the cursor position immediately
-});
+// let lastSelection = null;
+// quill.root.addEventListener('focus', function(e) {
+//   lastSelection = quill.getSelection(true);  // Store the current cursor position
+//   e.preventDefault();  // Prevent the keyboard from appearing
+//   quill.setSelection(lastSelection.index, lastSelection.length);  // Restore the cursor position immediately
+// });
 
 // // Get the editor element (the actual editable div)
 // const editorElement = document.querySelector('.ql-editor');
