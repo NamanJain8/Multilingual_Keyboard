@@ -466,6 +466,13 @@ quill.root.addEventListener('focus', function(e) {
   quill.setSelection(lastSelection.index, lastSelection.length);  // Restore the cursor position immediately
 });
 
+quill.root.addEventListener('mousedown', function(e) {
+  console.log("mouse down event")
+  lastSelection = quill.getSelection(true);  // Store the current cursor position
+  e.preventDefault();  // Prevent the keyboard from appearing
+  quill.setSelection(lastSelection.index, lastSelection.length);  // Restore the cursor position immediately
+});
+
 // Get the editor element (the actual editable div)
 const editorElement = document.querySelector('.ql-editor');
 // editorElement.preventDefault();
